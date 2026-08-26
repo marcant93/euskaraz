@@ -42,6 +42,17 @@ h1.app-title{font-size:26px;font-weight:800;color:#DA291C;}
 .fill-input:focus{outline:none;border-color:var(--blue);}
 .fill-input.correct{border-color:var(--green);background:#d7ffb8;color:var(--green-dark);}
 .fill-input.incorrect{border-color:var(--red);background:#ffdfe0;color:var(--red);}
+
+/* Ejercicio de emparejar */
+#match-wrap{display:flex;gap:12px;justify-content:space-between;}
+.match-col{flex:1;display:flex;flex-direction:column;gap:10px;}
+.match-item{padding:14px 10px;border:2px solid var(--gray);border-radius:12px;background:#fff;font-size:15px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;word-break:break-word;}
+.match-item:active{transform:scale(0.97);}
+.match-item.selected{border-color:var(--blue);background:#ddf4ff;}
+.match-item.matched{border-color:var(--green);background:#d7ffb8;color:var(--green-dark);cursor:default;opacity:0.85;}
+.match-item.wrong-flash{border-color:var(--red);background:#ffdfe0;color:var(--red);}
+.match-progress{text-align:center;font-size:13px;color:var(--dark-gray);margin-top:16px;}
+
 .footer-bar{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:#fff;border-top:2px solid var(--gray);padding:16px;display:flex;justify-content:center;}
 .footer-bar.hidden{display:none !important;}
 .big-btn{width:100%;padding:16px;border:none;border-radius:14px;font-size:16px;font-weight:800;letter-spacing:0.5px;cursor:pointer;text-transform:uppercase;color:#fff;background:var(--gray);color:var(--dark-gray);}
@@ -100,6 +111,11 @@ h1.app-title{font-size:26px;font-weight:800;color:#DA291C;}
       <div id="fill-input-wrap" style="display:none;">
         <input type="text" class="fill-input" id="fill-input" placeholder="Escribe la palabra..." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
       </div>
+      <div id="match-wrap" style="display:none;">
+        <div class="match-col" id="match-col-left"></div>
+        <div class="match-col" id="match-col-right"></div>
+      </div>
+      <p class="match-progress" id="match-progress" style="display:none;"></p>
     </div>
   </div>
 

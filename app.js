@@ -1,12 +1,18 @@
 // ===== Euskaraz - App de aprendizaje de euskera =====
 //
-// REFUERZO en checkAnswer() para el tipo "fill_blank": ademas de comparar
-// con normalizeAnswer() (que ya ignora mayusculas/acentos/espacios), si la
-// respuesta se marca como incorrecta se muestra en el mensaje de feedback
-// tanto la respuesta correcta esperada COMO el texto exacto que el usuario
-// escribio (entre comillas), para poder detectar a simple vista cualquier
-// diferencia sutil (espacio invisible, caracter distinto, etc.) sin
-// necesidad de depurar con herramientas de desarrollador.
+// NUEVO TIPO DE EJERCICIO: "match" (emparejar).
+// Cada pregunta de este tipo tiene un array "pairs" de 5 parejas
+// [euskera, español]. Se muestran las 5 palabras en euskera en la columna
+// izquierda (orden aleatorio) y las 5 traducciones en la columna derecha
+// (orden aleatorio, distinto). El usuario toca una palabra de cada columna;
+// si forman pareja correcta, ambas se marcan como "matched" y quedan fijas;
+// si no, se resaltan brevemente en rojo y se deseleccionan (sin penalizacion,
+// puede reintentarlo). Al completar las 5 parejas se considera la pregunta
+// resuelta (cuenta como 1 acierto en el resultado final, ya que no hay
+// "fallo" real posible en este tipo, solo tiempo).
+//
+// El banco de cada tema ahora mezcla tres tipos: "mcq"/"translate_*"
+// (opcion multiple), "fill_blank" (completar palabra) y "match" (emparejar).
 
 const STORAGE_KEY = 'euskaraz_progress_v6';
 const OLD_STORAGE_KEYS = ['euskaraz_progress_v1', 'euskaraz_progress_v2', 'euskaraz_progress_v3', 'euskaraz_progress_v4', 'euskaraz_progress_v5'];
@@ -438,6 +444,56 @@ const TOPICS = [
         "question": "Zaindu ___ denok!  (¡Cuídense todos!)",
         "answer": "zaitezte",
         "hint": "Forma de 'cuidarse' en plural, imperativo"
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Kaixo",
+            "Hola"
+          ],
+          [
+            "Agur",
+            "Adiós"
+          ],
+          [
+            "Egun on",
+            "Buenos días"
+          ],
+          [
+            "Eskerrik asko",
+            "Muchas gracias"
+          ],
+          [
+            "Barkatu",
+            "Perdón"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Gabon",
+            "Buenas noches"
+          ],
+          [
+            "Arratsalde on",
+            "Buenas tardes"
+          ],
+          [
+            "Mesedez",
+            "Por favor"
+          ],
+          [
+            "Ongi etorri",
+            "Bienvenido"
+          ],
+          [
+            "Zorte on",
+            "Buena suerte"
+          ]
+        ]
       }
     ]
   },
@@ -866,6 +922,81 @@ const TOPICS = [
         "question": "Pertsona ___ (1000000) bizi dira hirian.  (Un millón de personas viven en la ciudad.)",
         "answer": "milioi bat",
         "hint": "Un millón: 'bat' va detrás de 'milioi'"
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Bat",
+            "Uno"
+          ],
+          [
+            "Bi",
+            "Dos"
+          ],
+          [
+            "Hiru",
+            "Tres"
+          ],
+          [
+            "Lau",
+            "Cuatro"
+          ],
+          [
+            "Bost",
+            "Cinco"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Sei",
+            "Seis"
+          ],
+          [
+            "Zazpi",
+            "Siete"
+          ],
+          [
+            "Zortzi",
+            "Ocho"
+          ],
+          [
+            "Bederatzi",
+            "Nueve"
+          ],
+          [
+            "Hamar",
+            "Diez"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Hogei",
+            "Veinte"
+          ],
+          [
+            "Hirurogei",
+            "Sesenta"
+          ],
+          [
+            "Ehun",
+            "Cien"
+          ],
+          [
+            "Mila",
+            "Mil"
+          ],
+          [
+            "Erdia",
+            "La mitad"
+          ]
+        ]
       }
     ]
   },
@@ -1330,6 +1461,131 @@ const TOPICS = [
         "question": "___ elurra egiten du askotan.  (En invierno nieva a menudo.)",
         "answer": "Neguan",
         "hint": "Significa 'en invierno'"
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Ur",
+            "Agua"
+          ],
+          [
+            "Etxe",
+            "Casa"
+          ],
+          [
+            "Lagun",
+            "Amigo"
+          ],
+          [
+            "Ogi",
+            "Pan"
+          ],
+          [
+            "Txakur",
+            "Perro"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Ama",
+            "Madre"
+          ],
+          [
+            "Aita",
+            "Padre"
+          ],
+          [
+            "Anaia",
+            "Hermano"
+          ],
+          [
+            "Katu",
+            "Gato"
+          ],
+          [
+            "Zaldi",
+            "Caballo"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Gorria",
+            "Rojo"
+          ],
+          [
+            "Urdina",
+            "Azul"
+          ],
+          [
+            "Berdea",
+            "Verde"
+          ],
+          [
+            "Horia",
+            "Amarillo"
+          ],
+          [
+            "Zuria",
+            "Blanco"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Astelehena",
+            "Lunes"
+          ],
+          [
+            "Ostirala",
+            "Viernes"
+          ],
+          [
+            "Larunbata",
+            "Sábado"
+          ],
+          [
+            "Igandea",
+            "Domingo"
+          ],
+          [
+            "Urtarrila",
+            "Enero"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Udaberri",
+            "Primavera"
+          ],
+          [
+            "Uda",
+            "Verano"
+          ],
+          [
+            "Udazken",
+            "Otoño"
+          ],
+          [
+            "Negu",
+            "Invierno"
+          ],
+          [
+            "Eguraldia",
+            "El tiempo (clima)"
+          ]
+        ]
       }
     ]
   },
@@ -1788,6 +2044,56 @@ const TOPICS = [
         "question": "Ez ___ iritsi zinela.  (No sabía que habías llegado.)",
         "answer": "nekien",
         "hint": "Pasado del verbo jakin, 1ª persona"
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Naiz",
+            "Soy / Estoy"
+          ],
+          [
+            "Zara",
+            "Eres / Estás"
+          ],
+          [
+            "Da",
+            "Es / Está"
+          ],
+          [
+            "Gara",
+            "Somos / Estamos"
+          ],
+          [
+            "Dira",
+            "Son / Están"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Joan",
+            "Ir"
+          ],
+          [
+            "Etorri",
+            "Venir"
+          ],
+          [
+            "Egon",
+            "Estar"
+          ],
+          [
+            "Ukan",
+            "Tener"
+          ],
+          [
+            "Jakin",
+            "Saber"
+          ]
+        ]
       }
     ]
   }
@@ -1874,6 +2180,12 @@ let selectedOption = null;
 let answered = false;
 let currentAnswerCorrect = false;
 
+// Estado especifico del ejercicio de emparejar
+let matchSelectedLeft = null;
+let matchSelectedRight = null;
+let matchSolvedCount = 0;
+let matchTotalPairs = 0;
+
 function startLesson(topic) {
   currentTopic = topic;
   currentQuestions = pickRandomQuestions(topic);
@@ -1889,6 +2201,13 @@ function normalizeAnswer(text) {
   return String(text).trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
+function hideAllExerciseBlocks() {
+  document.getElementById('exercise-options').style.display = 'none';
+  document.getElementById('fill-input-wrap').style.display = 'none';
+  document.getElementById('match-wrap').style.display = 'none';
+  document.getElementById('match-progress').style.display = 'none';
+}
+
 function renderExercise() {
   answered = false;
   selectedOption = null;
@@ -1896,12 +2215,26 @@ function renderExercise() {
 
   const progressPct = (currentExerciseIndex / currentQuestions.length) * 100;
   document.getElementById('lesson-progress').style.width = progressPct + '%';
+
+  hideAllExerciseBlocks();
+  const hintEl = document.getElementById('exercise-hint');
+  hintEl.style.display = 'none';
+  const footerBar = document.getElementById('footer-bar');
+  const actionBtn = document.getElementById('action-btn');
+
+  if (ex.type === 'match') {
+    document.getElementById('exercise-question').textContent = 'Empareja cada palabra con su traducción';
+    footerBar.classList.add('hidden');
+    renderMatchExercise(ex);
+    return;
+  }
+
+  footerBar.classList.remove('hidden');
   document.getElementById('exercise-question').textContent = ex.question;
 
   const optionsContainer = document.getElementById('exercise-options');
   const fillWrap = document.getElementById('fill-input-wrap');
   const fillInput = document.getElementById('fill-input');
-  const hintEl = document.getElementById('exercise-hint');
 
   optionsContainer.innerHTML = '';
   const isFillBlank = ex.type === 'fill_blank';
@@ -1915,15 +2248,12 @@ function renderExercise() {
     if (ex.hint) {
       hintEl.textContent = '💡 ' + ex.hint;
       hintEl.style.display = 'block';
-    } else {
-      hintEl.style.display = 'none';
     }
     fillInput.oninput = () => {
       document.getElementById('action-btn').classList.toggle('active', fillInput.value.trim().length > 0);
     };
     setTimeout(() => fillInput.focus(), 100);
   } else {
-    hintEl.style.display = 'none';
     const opts = shuffle(ex.options);
     opts.forEach(opt => {
       const btn = document.createElement('button');
@@ -1936,10 +2266,101 @@ function renderExercise() {
 
   const feedback = document.getElementById('feedback-banner');
   feedback.className = 'feedback-banner hidden';
-  const actionBtn = document.getElementById('action-btn');
   actionBtn.textContent = 'Comprobar';
   actionBtn.className = 'big-btn';
   actionBtn.onclick = checkAnswer;
+}
+
+function renderMatchExercise(ex) {
+  matchSelectedLeft = null;
+  matchSelectedRight = null;
+  matchSolvedCount = 0;
+  matchTotalPairs = ex.pairs.length;
+
+  const leftItems = shuffle(ex.pairs.map((p, idx) => ({ text: p[0], pairId: idx })));
+  const rightItems = shuffle(ex.pairs.map((p, idx) => ({ text: p[1], pairId: idx })));
+
+  const matchWrap = document.getElementById('match-wrap');
+  const colLeft = document.getElementById('match-col-left');
+  const colRight = document.getElementById('match-col-right');
+  const progressEl = document.getElementById('match-progress');
+
+  matchWrap.style.display = 'flex';
+  progressEl.style.display = 'block';
+  colLeft.innerHTML = '';
+  colRight.innerHTML = '';
+
+  leftItems.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'match-item';
+    div.textContent = item.text;
+    div.dataset.pairId = item.pairId;
+    div.dataset.side = 'left';
+    div.addEventListener('click', () => onMatchItemClick(div, 'left', item.pairId, ex));
+    colLeft.appendChild(div);
+  });
+
+  rightItems.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'match-item';
+    div.textContent = item.text;
+    div.dataset.pairId = item.pairId;
+    div.dataset.side = 'right';
+    div.addEventListener('click', () => onMatchItemClick(div, 'right', item.pairId, ex));
+    colRight.appendChild(div);
+  });
+
+  updateMatchProgress();
+}
+
+function updateMatchProgress() {
+  document.getElementById('match-progress').textContent = matchSolvedCount + ' / ' + matchTotalPairs + ' parejas encontradas';
+}
+
+function onMatchItemClick(el, side, pairId, ex) {
+  if (el.classList.contains('matched')) return;
+
+  if (side === 'left') {
+    if (matchSelectedLeft) matchSelectedLeft.classList.remove('selected');
+    matchSelectedLeft = el;
+    el.classList.add('selected');
+  } else {
+    if (matchSelectedRight) matchSelectedRight.classList.remove('selected');
+    matchSelectedRight = el;
+    el.classList.add('selected');
+  }
+
+  if (matchSelectedLeft && matchSelectedRight) {
+    const leftPairId = matchSelectedLeft.dataset.pairId;
+    const rightPairId = matchSelectedRight.dataset.pairId;
+
+    if (leftPairId === rightPairId) {
+      matchSelectedLeft.classList.remove('selected');
+      matchSelectedRight.classList.remove('selected');
+      matchSelectedLeft.classList.add('matched');
+      matchSelectedRight.classList.add('matched');
+      matchSolvedCount += 1;
+      updateMatchProgress();
+      matchSelectedLeft = null;
+      matchSelectedRight = null;
+
+      if (matchSolvedCount >= matchTotalPairs) {
+        sessionCorrect += 1;
+        setTimeout(() => nextExercise(), 500);
+      }
+    } else {
+      const wrongLeft = matchSelectedLeft;
+      const wrongRight = matchSelectedRight;
+      wrongLeft.classList.add('wrong-flash');
+      wrongRight.classList.add('wrong-flash');
+      setTimeout(() => {
+        wrongLeft.classList.remove('selected', 'wrong-flash');
+        wrongRight.classList.remove('selected', 'wrong-flash');
+      }, 400);
+      matchSelectedLeft = null;
+      matchSelectedRight = null;
+    }
+  }
 }
 
 function selectOption(btn, value) {
@@ -1961,16 +2382,11 @@ function checkAnswer() {
   let userRawValue = '';
 
   if (ex.type === 'fill_blank') {
-    // Se lee el valor EN ESTE INSTANTE, justo antes de comparar, para
-    // evitar cualquier posible desincronizacion con el evento que dispara
-    // checkAnswer (click o Enter).
     userRawValue = fillInput.value;
     const userValue = userRawValue.trim();
     if (userValue.length === 0) return;
     answered = true;
-    const normalizedUser = normalizeAnswer(userValue);
-    const normalizedAnswer = normalizeAnswer(ex.answer);
-    currentAnswerCorrect = normalizedUser === normalizedAnswer;
+    currentAnswerCorrect = normalizeAnswer(userValue) === normalizeAnswer(ex.answer);
     fillInput.disabled = true;
     fillInput.className = 'fill-input ' + (currentAnswerCorrect ? 'correct' : 'incorrect');
     if (!currentAnswerCorrect) {
