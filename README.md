@@ -6,69 +6,70 @@ haciendo doble clic, sin necesidad de instalar nada ni de montar un servidor loc
 ## Cómo usarla
 
 1. Descomprime el ZIP en cualquier carpeta (sustituye por completo a versiones anteriores).
-2. Haz doble clic en `index.html`.
-3. Se abre en tu navegador por defecto y ya puedes jugar directamente.
+2. Haz doble clic en `index.html`, o accede a la URL si la tienes publicada en GitHub Pages.
+3. Elige uno de los 4 temas y juega.
 
-## Novedad: desbloqueo independiente por tema
+## Novedad: preguntas aleatorias en vez de niveles fijos
 
-Antes, las 12 lecciones estaban encadenadas en una única secuencia: había que completar
-Saludos I, II y III antes de poder tocar Números. Ahora cada uno de los 4 temas
-(Agurrak, Zenbakiak, Hiztegia, Esaldiak) tiene su **Nivel 1 desbloqueado desde el
-principio**, así que puedes elegir con qué tema empezar.
+Antes había 3 niveles fijos por tema (I, II, III), con las mismas 10 preguntas siempre
+en el mismo orden dentro de cada nivel. Ahora cada tema es un **banco de 30 preguntas**,
+y cada vez que entras a jugar, la app elige **10 preguntas al azar** de ese banco, en un
+orden distinto. Esto significa que:
 
-Dentro de cada tema, el orden sigue siendo progresivo: hay que completar el Nivel 1 de
-un tema (con 60% de aciertos o más) para desbloquear su Nivel 2, y el Nivel 2 para
-desbloquear el Nivel 3 de ese mismo tema. Pero los 4 temas ya no dependen entre sí.
+- Puedes rejugar el mismo tema varias veces y no siempre te saldrán las mismas preguntas.
+- Ya no hay niveles que desbloquear: los 4 temas están disponibles desde el principio,
+  siempre.
+- La pantalla de inicio muestra, para cada tema, tu **mejor precisión** conseguida hasta
+  ahora (por ejemplo, "Mejor: 90%"), en vez de una barra de progreso por nivel.
 
-Como este cambio afecta a cómo se guarda el progreso, la app usa una nueva clave de
-almacenamiento (`euskaraz_progress_v3`) y elimina automáticamente cualquier progreso de
-versiones anteriores al cargar, para evitar inconsistencias. Empezarás de cero de forma
-limpia con las 5 vidas y los 4 primeros niveles ya disponibles.
-
-## Reinicio manual de progreso
-
-Sigue disponible el botón **"Reiniciar progreso y vidas"** al final de la pantalla de
-inicio, con confirmación antes de borrar, por si quieres empezar de nuevo en cualquier
-momento sin tocar la consola del navegador.
+Este cambio usa una nueva clave de almacenamiento (`euskaraz_progress_v4`), así que al
+abrir esta versión se elimina automáticamente el progreso de versiones anteriores.
 
 ## Contenido incluido
 
-**4 temas × 3 niveles cada uno = 12 unidades, 120 ejercicios en total**, en euskera batúa:
+**4 temas, con un banco de 30 preguntas cada uno = 120 preguntas en total**, en euskera batúa:
 
-| Tema | Nivel 1 (desbloqueado) | Nivel 2 | Nivel 3 |
-|---|---|---|---|
-| Agurrak (Saludos) | Saludos básicos, gracias, despedidas | Presentaciones, deseos, cortesía | Frases hechas, expresiones formales |
-| Zenbakiak (Números) | Del 1 al 20 | Decenas, cientos, ordinales | Miles, millones, fracciones, porcentajes |
-| Hiztegia (Vocabulario) | Objetos, animales, naturaleza | Familia, colores, días, meses | Vocabulario administrativo y cívico |
-| Esaldiak (Frases) | Preguntas básicas, sí/no | Verbo *izan*/*ukan*, tiempo, lugar | Subordinadas, condicionales, registro formal |
+| Tema | Contenido del banco |
+|---|---|
+| Agurrak (Saludos) | Saludos básicos, despedidas, cortesía, expresiones formales |
+| Zenbakiak (Números) | Del 1 al millón, ordinales, fracciones, porcentajes |
+| Hiztegia (Vocabulario) | Objetos, animales, familia, colores, días, meses, ropa, transporte, estaciones |
+| Esaldiak (Frases) | Preguntas básicas, verbos *izan/ukan/joan/etorri/ibili*, condicionales |
+
+Cada partida elige 10 preguntas al azar del banco correspondiente.
 
 ## Mecánicas tipo Duolingo
 
 - **Vidas (❤️)**: empiezas con 5. Pierdes una por cada respuesta incorrecta.
 - **Puntos (⭐)**: +10 puntos por cada respuesta correcta.
-- **Racha diaria (🔥)**: se incrementa cada día que completas al menos un ejercicio.
-- **Progreso guardado**: en el `localStorage` del navegador, bajo la clave
-  `euskaraz_progress_v3`.
+- **Racha diaria (🔥)**: se incrementa cada día que completas al menos una partida.
+- **Mejor precisión por tema**: se guarda el mejor resultado histórico de cada tema.
+- **Progreso guardado**: en el `localStorage` del navegador (`euskaraz_progress_v4`).
 
 ## Estructura de archivos
 
-- `index.html` — pantallas de la app, agrupadas visualmente por tema, con el botón de reset
-- `app.js` — lógica completa; `LESSONS` contiene las 12 unidades (cada una con un `key`
-  textual estable); `TOPICS` define el agrupamiento visual y, ahora, también el ámbito
-  del desbloqueo (cada tema se desbloquea de forma independiente)
+- `index.html` — pantallas de la app; cada tema aparece como una única tarjeta
+- `app.js` — lógica completa; `TOPICS` contiene los 4 bancos de preguntas y la función
+  `pickRandomQuestions()` selecciona 10 al azar cada vez que se entra a un tema
 - `manifest.json` / `sw.js` / `icons/` — soporte opcional de PWA
 
-## Cómo añadir más niveles o temas
+## Cómo añadir más preguntas al banco
 
-- Para añadir un nivel dentro de un tema existente: añade la unidad en `LESSONS` con un
-  `key` nuevo (ej. `"agurrak-4"`) y añádelo al final del array `unitKeys` correspondiente
-  en `TOPICS`. Quedará bloqueado hasta completar el nivel anterior de ese mismo tema.
-- Para añadir un tema nuevo: crea un nuevo objeto en `TOPICS` con su propio `unitKeys`;
-  su primer nivel quedará desbloqueado automáticamente, igual que los 4 temas actuales.
+Abre `app.js` y busca la constante `TOPICS`. Cada tema tiene un array `questions`.
+Para añadir una pregunta nueva a un tema, añade un objeto con el mismo formato que
+las existentes al final del array correspondiente:
+
+```js
+{ "type": "mcq", "question": "Pregunta", "options": ["A", "B", "C", "D"], "answer": "A" }
+```
+
+No hay límite de preguntas por banco: cuantas más añadas, menos se repetirán entre
+partidas. La app siempre elige 10 al azar, sin importar cuántas haya en total.
 
 ## Próximas mejoras posibles
 
 - Ejercicios de escribir la respuesta (en vez de solo opción múltiple)
 - Audio de pronunciación
-- Nivel 4 con diálogos completos o textos administrativos en euskera
+- Ajustar el número de preguntas por partida (actualmente fijo en 10, variable
+  `QUESTIONS_PER_SESSION` en `app.js`)
 - Modo oscuro

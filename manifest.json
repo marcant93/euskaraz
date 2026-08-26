@@ -1,7 +1,7 @@
 {
   "name": "Euskaraz - Aprende euskera",
   "short_name": "Euskaraz",
-  "description": "Aprende euskera batúa con lecciones interactivas, al estilo Duolingo",
+  "description": "Aprende euskera batúa con preguntas aleatorias, al estilo Duolingo",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",

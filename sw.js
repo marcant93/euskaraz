@@ -1,4 +1,4 @@
-const CACHE_NAME = 'euskaraz-cache-v4';
+const CACHE_NAME = 'euskaraz-cache-v5';
 const ASSETS = ['./index.html', './app.js', './manifest.json', './icons/icon-192.png', './icons/icon-512.png'];
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));

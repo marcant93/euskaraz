@@ -42,37 +42,26 @@ body{
 h1.app-title{font-size:26px;font-weight:800;color:var(--green);text-align:center;margin-bottom:4px;}
 .subtitle{text-align:center;color:var(--dark-gray);font-size:14px;margin-bottom:20px;}
 
-.topic-block{margin-bottom:24px;}
-.topic-header{font-size:15px;font-weight:800;color:var(--dark-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;padding-left:4px;}
-
 .unit-card{
   display:flex;align-items:center;gap:14px;
   background:#fff;border:2px solid var(--gray);border-radius:16px;
-  padding:16px;margin-bottom:10px;cursor:pointer;
+  padding:16px;margin-bottom:14px;cursor:pointer;
   transition:transform .1s, box-shadow .1s;
 }
 .unit-card:active{transform:scale(0.97);}
-.unit-card.locked{opacity:0.5;cursor:not-allowed;}
 .unit-icon{
-  font-size:28px;width:48px;height:48px;border-radius:50%;
+  font-size:34px;width:56px;height:56px;border-radius:50%;
   background:var(--green);display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;position:relative;
+  flex-shrink:0;
 }
-.unit-card.locked .unit-icon{background:var(--dark-gray);}
-.level-badge{
-  position:absolute;bottom:-4px;right:-4px;background:#fff;border:2px solid var(--green);
-  border-radius:50%;width:20px;height:20px;font-size:11px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;color:var(--green);
-}
-.unit-card.locked .level-badge{border-color:var(--dark-gray);color:var(--dark-gray);}
 .unit-info{flex:1;}
-.unit-info h3{font-size:16px;font-weight:800;color:var(--text);}
-.unit-info p{font-size:12px;color:var(--dark-gray);}
-.unit-progress{
-  width:100%;height:7px;background:var(--gray);border-radius:8px;margin-top:6px;overflow:hidden;
+.unit-info h3{font-size:17px;font-weight:800;color:var(--text);}
+.unit-info p{font-size:13px;color:var(--dark-gray);}
+.unit-badge{
+  font-size:11px;font-weight:700;color:var(--green);background:#eaffd6;
+  border-radius:8px;padding:2px 8px;display:inline-block;margin-top:4px;
 }
-.unit-progress-fill{height:100%;background:var(--green);border-radius:8px;transition:width .3s;}
-.unit-check{font-size:20px;color:var(--green);}
+.unit-best{font-size:20px;}
 
 .progress-bar-outer{flex:1;height:14px;background:var(--gray);border-radius:10px;margin:0 12px;overflow:hidden;}
 .progress-bar-inner{height:100%;background:var(--green);border-radius:10px;transition:width .3s;}
@@ -150,7 +139,7 @@ h1.app-title{font-size:26px;font-weight:800;color:var(--green);text-align:center
       <div class="stat points">⭐ <span id="points-count">0</span></div>
     </div>
     <h1 class="app-title">Euskaraz</h1>
-    <p class="subtitle">Aprende euskera batúa, paso a paso</p>
+    <p class="subtitle">Aprende euskera batúa — 10 preguntas aleatorias cada vez</p>
     <div id="units-list"></div>
     <button class="reset-link" id="reset-progress-btn">Reiniciar progreso y vidas</button>
   </div>
