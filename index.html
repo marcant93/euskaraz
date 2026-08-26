@@ -4,107 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 <title>Euskaraz - Aprende euskera</title>
-<meta name="theme-color" content="#58cc02">
+<meta name="theme-color" content="#DA291C">
 <style>
-:root{
-  --green:#58cc02;
-  --green-dark:#4caf00;
-  --blue:#1cb0f6;
-  --red:#ff4b4b;
-  --gray:#e5e5e5;
-  --dark-gray:#777777;
-  --text:#3c3c3c;
-  --gold:#ffc800;
-}
+:root{--green:#58cc02;--green-dark:#4caf00;--blue:#1cb0f6;--red:#ff4b4b;--gray:#e5e5e5;--dark-gray:#777777;--text:#3c3c3c;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
-  background:#f7f7f7;
-  color:var(--text);
-  min-height:100vh;
-  -webkit-tap-highlight-color:transparent;
-}
+body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:#f7f7f7;color:var(--text);min-height:100vh;-webkit-tap-highlight-color:transparent;}
 #app{max-width:480px;margin:0 auto;min-height:100vh;background:#fff;display:flex;flex-direction:column;position:relative;}
-
-.topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 16px;border-bottom:2px solid var(--gray);
-  position:sticky;top:0;background:#fff;z-index:10;
-}
-.stat{display:flex;align-items:center;gap:4px;font-weight:800;font-size:15px;}
-.stat.streak{color:#ff9600;}
-.stat.hearts{color:var(--red);}
-.stat.points{color:var(--gold);}
-.back-btn{background:none;border:none;font-size:22px;cursor:pointer;color:var(--dark-gray);}
-
+.topbar{display:flex;align-items:center;justify-content:flex-end;padding:14px 16px;border-bottom:2px solid var(--gray);position:sticky;top:0;background:#fff;z-index:10;min-height:24px;}
+.back-btn{background:none;border:none;font-size:22px;cursor:pointer;color:var(--dark-gray);margin-right:auto;}
 .screen{padding:20px 16px 90px;flex:1;}
-.screen.hidden{display:none;}
-h1.app-title{font-size:26px;font-weight:800;color:var(--green);text-align:center;margin-bottom:4px;}
+.screen.hidden{display:none !important;}
+.app-title-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px;}
+.app-title-row svg{flex-shrink:0;}
+h1.app-title{font-size:26px;font-weight:800;color:#DA291C;}
 .subtitle{text-align:center;color:var(--dark-gray);font-size:14px;margin-bottom:20px;}
-
-.unit-card{
-  display:flex;align-items:center;gap:14px;
-  background:#fff;border:2px solid var(--gray);border-radius:16px;
-  padding:16px;margin-bottom:14px;cursor:pointer;
-  transition:transform .1s, box-shadow .1s;
-}
+.unit-card{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid var(--gray);border-radius:16px;padding:16px;margin-bottom:14px;cursor:pointer;transition:transform .1s;}
 .unit-card:active{transform:scale(0.97);}
-.unit-icon{
-  font-size:34px;width:56px;height:56px;border-radius:50%;
-  background:var(--green);display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
+.unit-icon{font-size:34px;width:56px;height:56px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .unit-info{flex:1;}
 .unit-info h3{font-size:17px;font-weight:800;color:var(--text);}
 .unit-info p{font-size:13px;color:var(--dark-gray);}
-.unit-badge{
-  font-size:11px;font-weight:700;color:var(--green);background:#eaffd6;
-  border-radius:8px;padding:2px 8px;display:inline-block;margin-top:4px;
-}
-.unit-best{font-size:20px;}
-
+.unit-badge{font-size:11px;font-weight:700;color:var(--green);background:#eaffd6;border-radius:8px;padding:2px 8px;display:inline-block;margin-top:4px;}
 .progress-bar-outer{flex:1;height:14px;background:var(--gray);border-radius:10px;margin:0 12px;overflow:hidden;}
 .progress-bar-inner{height:100%;background:var(--green);border-radius:10px;transition:width .3s;}
-
 .exercise-box{padding:24px 16px;text-align:center;}
-.exercise-question{font-size:22px;font-weight:800;margin-bottom:28px;line-height:1.3;}
-.options{display:flex;flex-direction:column;gap:12px;}
-.option-btn{
-  padding:16px;border:2px solid var(--gray);border-radius:14px;
-  background:#fff;font-size:17px;font-weight:600;cursor:pointer;
-  text-align:left;transition:all .15s;
-}
+.exercise-question{font-size:22px;font-weight:800;margin-bottom:12px;line-height:1.3;}
+.exercise-hint{font-size:13px;color:var(--dark-gray);margin-bottom:24px;font-style:italic;}
+#exercise-options{display:flex;flex-direction:column;gap:12px;}
+.option-btn{padding:16px;border:2px solid var(--gray);border-radius:14px;background:#fff;font-size:17px;font-weight:600;cursor:pointer;text-align:left;transition:all .15s;}
 .option-btn:active{transform:scale(0.98);}
 .option-btn.selected{border-color:var(--blue);background:#ddf4ff;}
 .option-btn.correct{border-color:var(--green);background:#d7ffb8;color:var(--green-dark);}
 .option-btn.incorrect{border-color:var(--red);background:#ffdfe0;color:var(--red);}
 .option-btn:disabled{cursor:default;}
-
-.footer-bar{
-  position:fixed;bottom:0;left:0;right:0;
-  max-width:480px;margin:0 auto;
-  background:#fff;border-top:2px solid var(--gray);
-  padding:16px;display:flex;justify-content:center;
-}
-.big-btn{
-  width:100%;padding:16px;border:none;border-radius:14px;
-  font-size:16px;font-weight:800;letter-spacing:0.5px;
-  cursor:pointer;text-transform:uppercase;color:#fff;
-  background:var(--gray);color:var(--dark-gray);
-}
+#fill-input-wrap{margin-top:8px;}
+.fill-input{width:100%;padding:16px;border:2px solid var(--gray);border-radius:14px;font-size:18px;font-weight:600;text-align:center;transition:border-color .15s;}
+.fill-input:focus{outline:none;border-color:var(--blue);}
+.fill-input.correct{border-color:var(--green);background:#d7ffb8;color:var(--green-dark);}
+.fill-input.incorrect{border-color:var(--red);background:#ffdfe0;color:var(--red);}
+.footer-bar{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:#fff;border-top:2px solid var(--gray);padding:16px;display:flex;justify-content:center;}
+.footer-bar.hidden{display:none !important;}
+.big-btn{width:100%;padding:16px;border:none;border-radius:14px;font-size:16px;font-weight:800;letter-spacing:0.5px;cursor:pointer;text-transform:uppercase;color:#fff;background:var(--gray);color:var(--dark-gray);}
 .big-btn.active{background:var(--green);color:#fff;}
 .big-btn.active:active{background:var(--green-dark);}
 .big-btn.wrong-state{background:var(--red);}
-
-.feedback-banner{
-  position:fixed;bottom:80px;left:0;right:0;max-width:480px;margin:0 auto;
-  padding:14px 16px;font-weight:700;font-size:15px;
-  display:flex;align-items:center;gap:10px;
-}
+.feedback-banner{position:fixed;bottom:80px;left:0;right:0;max-width:480px;margin:0 auto;padding:14px 16px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:10px;}
 .feedback-banner.correct{background:#d7ffb8;color:var(--green-dark);}
 .feedback-banner.incorrect{background:#ffdfe0;color:var(--red);}
-.feedback-banner.hidden{display:none;}
-
+.feedback-banner.hidden{display:none !important;}
 .result-screen{text-align:center;padding:60px 24px;}
 .result-emoji{font-size:64px;margin-bottom:16px;}
 .result-title{font-size:24px;font-weight:800;margin-bottom:8px;}
@@ -112,47 +59,47 @@ h1.app-title{font-size:26px;font-weight:800;color:var(--green);text-align:center
 .result-stat{text-align:center;}
 .result-stat .num{font-size:24px;font-weight:800;color:var(--green);}
 .result-stat .label{font-size:12px;color:var(--dark-gray);}
-
-.no-hearts{text-align:center;padding:60px 24px;}
-.no-hearts .emoji{font-size:64px;margin-bottom:16px;}
-
-.reset-link{
-  display:block;text-align:center;margin-top:10px;color:var(--dark-gray);
-  font-size:13px;text-decoration:underline;cursor:pointer;background:none;border:none;width:100%;
-}
-
-@keyframes shake{
-  0%,100%{transform:translateX(0);}
-  20%,60%{transform:translateX(-8px);}
-  40%,80%{transform:translateX(8px);}
-}
+.reset-link{display:block;text-align:center;margin-top:10px;color:var(--dark-gray);font-size:13px;text-decoration:underline;cursor:pointer;background:none;border:none;width:100%;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
 .shake{animation:shake .4s;}
 </style>
 </head>
 <body>
 <div id="app">
-
   <div id="home-screen" class="screen">
-    <div class="topbar" style="border-bottom:none;">
-      <div class="stat streak">🔥 <span id="streak-count">0</span></div>
-      <div class="stat hearts">❤️ <span id="hearts-count">5</span></div>
-      <div class="stat points">⭐ <span id="points-count">0</span></div>
+    <div class="topbar"></div>
+    <div class="app-title-row">
+      <svg viewBox="0 0 100 100" width="40" height="40">
+        <defs><clipPath id="rs1"><rect x="0" y="0" width="100" height="100" rx="16" ry="16"/></clipPath></defs>
+        <g clip-path="url(#rs1)">
+          <rect x="0" y="0" width="100" height="100" fill="#DA291C"/>
+          <polygon points="0,0 14,0 100,86 100,100 86,100 0,14" fill="#009B48"/>
+          <polygon points="86,0 100,0 100,14 14,100 0,100 0,86" fill="#009B48"/>
+          <rect x="42" y="0" width="16" height="100" fill="#FFFFFF"/>
+          <rect x="0" y="42" width="100" height="16" fill="#FFFFFF"/>
+        </g>
+        <path d="M 34 24 L 66 24 L 66 36 L 46 36 L 46 44 L 62 44 L 62 56 L 46 56 L 46 64 L 66 64 L 66 76 L 34 76 Z"
+              fill="#FFFFFF" stroke="#0A1F44" stroke-width="3.5" stroke-linejoin="round"/>
+      </svg>
+      <h1 class="app-title">Euskaraz</h1>
     </div>
-    <h1 class="app-title">Euskaraz</h1>
-    <p class="subtitle">Aprende euskera batúa — 10 preguntas aleatorias cada vez</p>
+    <p class="subtitle">Aprende euskera batúa — juega sin límite de intentos</p>
     <div id="units-list"></div>
-    <button class="reset-link" id="reset-progress-btn">Reiniciar progreso y vidas</button>
+    <button class="reset-link" id="reset-progress-btn">Reiniciar progreso</button>
   </div>
 
   <div id="lesson-screen" class="screen hidden">
     <div class="topbar">
       <button class="back-btn" id="exit-lesson-btn">✕</button>
       <div class="progress-bar-outer"><div class="progress-bar-inner" id="lesson-progress"></div></div>
-      <div class="stat hearts">❤️ <span id="lesson-hearts">5</span></div>
     </div>
     <div class="exercise-box">
       <div class="exercise-question" id="exercise-question"></div>
-      <div class="options" id="exercise-options"></div>
+      <div class="exercise-hint" id="exercise-hint" style="display:none;"></div>
+      <div id="exercise-options" style="display:none;"></div>
+      <div id="fill-input-wrap" style="display:none;">
+        <input type="text" class="fill-input" id="fill-input" placeholder="Escribe la palabra..." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
     </div>
   </div>
 
@@ -167,7 +114,7 @@ h1.app-title{font-size:26px;font-weight:800;color:var(--green);text-align:center
       <div class="result-emoji" id="result-emoji">🎉</div>
       <div class="result-title" id="result-title">¡Lección completada!</div>
       <div class="result-stats">
-        <div class="result-stat"><div class="num" id="result-points">+0</div><div class="label">PUNTOS</div></div>
+        <div class="result-stat"><div class="num" id="result-points">0/0</div><div class="label">RESPUESTAS CORRECTAS</div></div>
         <div class="result-stat"><div class="num" id="result-accuracy">0%</div><div class="label">PRECISIÓN</div></div>
       </div>
     </div>
@@ -175,18 +122,6 @@ h1.app-title{font-size:26px;font-weight:800;color:var(--green);text-align:center
       <button class="big-btn active" id="continue-btn">Continuar</button>
     </div>
   </div>
-
-  <div id="no-hearts-screen" class="screen hidden">
-    <div class="no-hearts">
-      <div class="emoji">💔</div>
-      <div class="result-title">¡Sin vidas!</div>
-      <p class="subtitle">Espera a que se recarguen o reinicia para seguir practicando.</p>
-    </div>
-    <div class="footer-bar">
-      <button class="big-btn active" id="refill-hearts-btn">Recargar vidas (demo)</button>
-    </div>
-  </div>
-
 </div>
 <script src="app.js"></script>
 </body>

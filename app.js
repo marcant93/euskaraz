@@ -1,15 +1,15 @@
 // ===== Euskaraz - App de aprendizaje de euskera =====
-// Las preguntas estan embebidas directamente aqui (sin fetch),
-// para que la app funcione abriendo index.html con doble clic.
 //
-// NUEVO MODELO: ya no hay niveles fijos (I, II, III). Cada tema tiene un
-// banco de 30 preguntas ("questions"). Cada vez que se entra a un tema,
-// se eligen 10 preguntas al azar de ese banco, en orden aleatorio.
-// No hay sistema de desbloqueo: los 4 temas estan siempre disponibles.
+// REFUERZO en checkAnswer() para el tipo "fill_blank": ademas de comparar
+// con normalizeAnswer() (que ya ignora mayusculas/acentos/espacios), si la
+// respuesta se marca como incorrecta se muestra en el mensaje de feedback
+// tanto la respuesta correcta esperada COMO el texto exacto que el usuario
+// escribio (entre comillas), para poder detectar a simple vista cualquier
+// diferencia sutil (espacio invisible, caracter distinto, etc.) sin
+// necesidad de depurar con herramientas de desarrollador.
 
-const STORAGE_KEY = 'euskaraz_progress_v4';
-const OLD_STORAGE_KEYS = ['euskaraz_progress_v1', 'euskaraz_progress_v2', 'euskaraz_progress_v3'];
-const MAX_HEARTS = 5;
+const STORAGE_KEY = 'euskaraz_progress_v6';
+const OLD_STORAGE_KEYS = ['euskaraz_progress_v1', 'euskaraz_progress_v2', 'euskaraz_progress_v3', 'euskaraz_progress_v4', 'euskaraz_progress_v5'];
 const QUESTIONS_PER_SESSION = 10;
 
 const TOPICS = [
@@ -199,12 +199,12 @@ const TOPICS = [
         "type": "mcq",
         "question": "¿Cómo se dice 'Mucho gusto' (formal)?",
         "options": [
-          "Poztu naiz",
+          "Pozten naiz",
           "Barkatu",
           "Mesedez",
           "Ez horregatik"
         ],
-        "answer": "Poztu naiz"
+        "answer": "Pozten naiz"
       },
       {
         "type": "translate_es_eu",
@@ -348,6 +348,96 @@ const TOPICS = [
           "Volved pronto a casa",
           "Buenas noches en casa"
         ]
+      },
+      {
+        "type": "fill_blank",
+        "question": "___, zer moduz?  (Hola, ¿qué tal?)",
+        "answer": "Kaixo",
+        "hint": "Saludo informal de 'hola'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ on, nola zaude?  (Buenos días, ¿cómo estás?)",
+        "answer": "Egun",
+        "hint": "Egun ___ = buenos días"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Arratsalde ___, guztioi!  (¡Buenas tardes a todos!)",
+        "answer": "on",
+        "hint": "Se repite en 'egun on' y 'gabon'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Eskerrik ___!  (¡Muchas gracias!)",
+        "answer": "asko",
+        "hint": "Eskerrik ___ = muchas gracias"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ez ___!  (¡De nada!, literalmente 'no por eso')",
+        "answer": "horregatik",
+        "hint": "Ez ___ = de nada"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Gero ___!  (¡Hasta luego!)",
+        "answer": "arte",
+        "hint": "Gero ___ = hasta luego"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ arte, lagun!  (¡Hasta mañana, amigo!)",
+        "answer": "Bihar",
+        "hint": "Significa 'mañana' (el día siguiente)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ondo ___!  (¡Que te vaya bien!)",
+        "answer": "pasa",
+        "hint": "Ondo ___ = que te vaya bien"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ naiz zu ezagutzeaz.  (Me alegro de conocerte.)",
+        "answer": "Pozten",
+        "hint": "Presente del verbo poztu (alegrarse): pozten + naiz"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ongi ___ gure etxera!  (¡Bienvenido a nuestra casa!)",
+        "answer": "etorri",
+        "hint": "Ongi ___ = bienvenido"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ikusi ___!  (¡Hasta la vista!)",
+        "answer": "arte",
+        "hint": "Se repite también en 'gero arte'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zorte ___!  (¡Buena suerte!)",
+        "answer": "on",
+        "hint": "Zorte ___ = buena suerte"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Laster ___ zaitut.  (Espero verte pronto.)",
+        "answer": "ikusiko",
+        "hint": "Futuro del verbo 'ikusi' (ver)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ berandu iritsi izana.  (Siento mucho el retraso.)",
+        "answer": "Barkatu",
+        "hint": "Significa 'perdón' o 'disculpa'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zaindu ___ denok!  (¡Cuídense todos!)",
+        "answer": "zaitezte",
+        "hint": "Forma de 'cuidarse' en plural, imperativo"
       }
     ]
   },
@@ -686,6 +776,96 @@ const TOPICS = [
           "Veinte de cien",
           "Ciento veinte"
         ]
+      },
+      {
+        "type": "fill_blank",
+        "question": "Lagun ___ (1) dut hemen.  (Tengo un amigo aquí.)",
+        "answer": "bat",
+        "hint": "El número 1: 'bat' va DETRÁS del sustantivo (lagun bat)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (5) ordu daramat lanean.  (Llevo 5 horas trabajando.)",
+        "answer": "Bost",
+        "hint": "El número 5 (va delante, como el resto salvo 'bat')"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (10) euro balio du.  (Vale 10 euros.)",
+        "answer": "Hamar",
+        "hint": "El número 10"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (20) urte ditut.  (Tengo 20 años.)",
+        "answer": "Hogei",
+        "hint": "El número 20"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (30) minutu barru.  (En 30 minutos.)",
+        "answer": "Hogeita hamar",
+        "hint": "20 + 10"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (100) pertsona zeuden.  (Había 100 personas.)",
+        "answer": "Ehun",
+        "hint": "El número 100"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (1000) euro kostatzen da.  (Cuesta 1000 euros.)",
+        "answer": "Mila",
+        "hint": "El número 1000"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (60) urte ditu aitonak.  (El abuelo tiene 60 años.)",
+        "answer": "Hirurogei",
+        "hint": "El número 60"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (80) liburu ditu liburutegian.  (Tiene 80 libros en la biblioteca.)",
+        "answer": "Laurogei",
+        "hint": "El número 80"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ mailakoa da.  (Es de primer nivel/grado.)",
+        "answer": "Lehen",
+        "hint": "Ordinal 'primero', forma corta"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Hori da ___ aldiz esaten dudana.  (Es la segunda vez que lo digo.)",
+        "answer": "bigarren",
+        "hint": "Ordinal 'segundo'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ (12) hilabete ditu urte batek.  (Un año tiene 12 meses.)",
+        "answer": "Hamabi",
+        "hint": "El número 12"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Tartaren ___ jan dut.  (Me he comido la mitad de la tarta.)",
+        "answer": "erdia",
+        "hint": "Significa 'la mitad' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ehuneko ___ (20) deskontua dago.  (Hay un 20% de descuento.)",
+        "answer": "hogei",
+        "hint": "El número 20"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Pertsona ___ (1000000) bizi dira hirian.  (Un millón de personas viven en la ciudad.)",
+        "answer": "milioi bat",
+        "hint": "Un millón: 'bat' va detrás de 'milioi'"
       }
     ]
   },
@@ -1024,6 +1204,132 @@ const TOPICS = [
           "La estación",
           "El calendario"
         ]
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ edan behar dut, egarri naiz.  (Necesito beber agua, tengo sed.)",
+        "answer": "Ura",
+        "hint": "Significa 'agua' (con artículo, forma declinada de 'ur')"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Gure ___ handia da.  (Nuestra casa es grande.)",
+        "answer": "etxea",
+        "hint": "Significa 'casa' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nire ___ Bilbon bizi da.  (Mi amigo vive en Bilbao.)",
+        "answer": "laguna",
+        "hint": "Significa 'amigo' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Goizean ___ jaten dut.  (Por la mañana como pan.)",
+        "answer": "ogia",
+        "hint": "Significa 'pan' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nire ___ oso alaia da.  (Mi perro es muy alegre.)",
+        "answer": "txakurra",
+        "hint": "Significa 'perro' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ oso beroa dago gaur.  (El sol está muy fuerte hoy.)",
+        "answer": "Eguzkia",
+        "hint": "Significa 'sol' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ handia dago herriaren ondoan.  (Hay una montaña grande junto al pueblo.)",
+        "answer": "Mendi",
+        "hint": "Significa 'montaña' (sin artículo, forma indeterminada tras 'handia')"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ bat irakurtzen dut gauero.  (Leo un libro todas las noches.)",
+        "answer": "Liburu",
+        "hint": "Significa 'libro' (sin artículo, va seguido de 'bat')"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ gaineko sagarra hartu dut.  (He cogido la manzana de encima de la mesa.)",
+        "answer": "Mahai",
+        "hint": "Significa 'mesa' (sin artículo, como complemento)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ene ___ Bilbon bizi da.  (Mi madre vive en Bilbao.)",
+        "answer": "ama",
+        "hint": "Significa 'madre' (sin artículo tras 'ene')"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nire ___ medikua da.  (Mi padre es médico.)",
+        "answer": "aita",
+        "hint": "Significa 'padre' (sin artículo tras 'nire')"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nire ___ berdea da.  (Mi coche es verde.)",
+        "answer": "autoa",
+        "hint": "Significa 'coche' (con artículo); 'berdea' ya está escrito en la frase"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zeruaren kolorea ___ da.  (El color del cielo es azul.)",
+        "answer": "urdina",
+        "hint": "Significa 'azul' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ da gaur.  (Hoy es lunes.)",
+        "answer": "Astelehena",
+        "hint": "Significa 'lunes' (con artículo, como predicado)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ joango gara zinemara.  (El viernes iremos al cine.)",
+        "answer": "Ostiralean",
+        "hint": "Significa 'el viernes' (en/durante)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ hasten da urtea.  (El año comienza en enero.)",
+        "answer": "Urtarrilean",
+        "hint": "Significa 'en enero'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nire autoaren kolorea ___ da.  (El color de mi coche es verde.)",
+        "answer": "berdea",
+        "hint": "Significa 'verde' (con artículo, como predicado)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ maite dut, oso alaia da.  (Me gusta el gato, es muy alegre.)",
+        "answer": "Katua",
+        "hint": "Significa 'gato' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ hartu dugu Madrilera joateko.  (Hemos cogido el avión para ir a Madrid.)",
+        "answer": "Hegazkina",
+        "hint": "Significa 'avión' (con artículo)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ loreak ateratzen dira.  (En primavera salen las flores.)",
+        "answer": "Udaberrian",
+        "hint": "Significa 'en primavera'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ elurra egiten du askotan.  (En invierno nieva a menudo.)",
+        "answer": "Neguan",
+        "hint": "Significa 'en invierno'"
       }
     ]
   },
@@ -1362,6 +1668,126 @@ const TOPICS = [
           "Todo ha salido bien",
           "Quiero que salga todo perfecto"
         ]
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nire izena ___ Jon.  (Mi nombre es Jon.)",
+        "answer": "da",
+        "hint": "Forma del verbo izan, 3ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ongi ___, eskerrik asko.  (Estoy bien, gracias.)",
+        "answer": "nago",
+        "hint": "Forma del verbo egon, 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ez dut ___.  (No entiendo.)",
+        "answer": "ulertzen",
+        "hint": "Significa 'entendiendo'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "___ dago komuna?  (¿Dónde está el baño?)",
+        "answer": "Non",
+        "hint": "Significa '¿dónde?'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zenbat ___?  (¿Cuánto cuesta?)",
+        "answer": "da",
+        "hint": "Forma del verbo izan, 3ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Laguntzerik al ___?  (¿Me puedes ayudar?)",
+        "answer": "didazu",
+        "hint": "Forma verbal de 'dar/ayudar', 2ª persona a 1ª"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ni Bilbokoa ___.  (Yo soy de Bilbao.)",
+        "answer": "naiz",
+        "hint": "Forma del verbo izan, 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zuek Donostiakoak ___.  (Vosotros sois de San Sebastián.)",
+        "answer": "zarete",
+        "hint": "Forma del verbo izan, 2ª persona plural"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nik liburu bat ___.  (Yo tengo un libro.)",
+        "answer": "dut",
+        "hint": "Forma del verbo ukan (tener), 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Etxean ___.  (Estoy en casa.)",
+        "answer": "nago",
+        "hint": "Forma del verbo egon, 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Bilbotik ___.  (Vengo de Bilbao.)",
+        "answer": "nator",
+        "hint": "Forma del verbo etorri, 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Bihar lanera ___ naiz.  (Mañana voy a ir a trabajar.)",
+        "answer": "joango",
+        "hint": "Futuro del verbo joan (ir)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zer ordu ___?  (¿Qué hora es?)",
+        "answer": "da",
+        "hint": "Forma del verbo izan, 3ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ba___ nora joan behar dudan.  (Sé a dónde tengo que ir.)",
+        "answer": "dakit",
+        "hint": "Forma del verbo jakin (saber), 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nora ___?  (¿A dónde vas?)",
+        "answer": "zoaz",
+        "hint": "Forma del verbo joan, 2ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Haiek gaur ___.  (Ellos vienen hoy.)",
+        "answer": "datoz",
+        "hint": "Forma del verbo etorri, 3ª persona plural"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Uste dut arrazoi ___.  (Creo que tienes razón.)",
+        "answer": "duzula",
+        "hint": "Forma subordinada de ukan, 2ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Denbora ___, joango nintzateke.  (Si tuviera tiempo, iría.)",
+        "answer": "banu",
+        "hint": "Forma condicional de ukan"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Gehiago ikasi ___ duzu.  (Necesitas estudiar más.)",
+        "answer": "behar",
+        "hint": "Significa 'necesidad, deber'"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Ez ___ iritsi zinela.  (No sabía que habías llegado.)",
+        "answer": "nekien",
+        "hint": "Pasado del verbo jakin, 1ª persona"
       }
     ]
   }
@@ -1370,10 +1796,6 @@ const TOPICS = [
 let state = null;
 
 const defaultState = () => ({
-  points: 0,
-  hearts: MAX_HEARTS,
-  streak: 0,
-  lastPlayedDate: null,
   topicStats: {}
 });
 
@@ -1399,26 +1821,13 @@ function resetProgress() {
   showScreen('home-screen');
 }
 
-function todayStr() {
-  return new Date().toISOString().slice(0, 10);
-}
-
-function updateStreak() {
-  const today = todayStr();
-  if (state.lastPlayedDate === today) return;
-  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-  if (state.lastPlayedDate === yesterday) {
-    state.streak += 1;
-  } else {
-    state.streak = 1;
-  }
-  state.lastPlayedDate = today;
-  saveState();
-}
-
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
+}
+
+function isVisible(el) {
+  return el && el.offsetParent !== null;
 }
 
 function shuffle(arr) {
@@ -1436,19 +1845,13 @@ function pickRandomQuestions(topic) {
 }
 
 function renderHome() {
-  document.getElementById('streak-count').textContent = state.streak;
-  document.getElementById('hearts-count').textContent = state.hearts;
-  document.getElementById('points-count').textContent = state.points;
-
   const list = document.getElementById('units-list');
   list.innerHTML = '';
 
   TOPICS.forEach(topic => {
     const stats = state.topicStats[topic.key] || { timesPlayed: 0, bestAccuracy: 0 };
-
     const card = document.createElement('div');
     card.className = 'unit-card';
-
     card.innerHTML = `
       <div class="unit-icon">${topic.icon}</div>
       <div class="unit-info">
@@ -1457,7 +1860,6 @@ function renderHome() {
         ${stats.timesPlayed > 0 ? `<span class="unit-badge">Mejor: ${stats.bestAccuracy}%</span>` : ''}
       </div>
     `;
-
     card.addEventListener('click', () => startLesson(topic));
     list.appendChild(card);
   });
@@ -1473,10 +1875,6 @@ let answered = false;
 let currentAnswerCorrect = false;
 
 function startLesson(topic) {
-  if (state.hearts <= 0) {
-    showScreen('no-hearts-screen');
-    return;
-  }
   currentTopic = topic;
   currentQuestions = pickRandomQuestions(topic);
   currentExerciseIndex = 0;
@@ -1487,6 +1885,10 @@ function startLesson(topic) {
   renderExercise();
 }
 
+function normalizeAnswer(text) {
+  return String(text).trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
 function renderExercise() {
   answered = false;
   selectedOption = null;
@@ -1494,20 +1896,43 @@ function renderExercise() {
 
   const progressPct = (currentExerciseIndex / currentQuestions.length) * 100;
   document.getElementById('lesson-progress').style.width = progressPct + '%';
-  document.getElementById('lesson-hearts').textContent = state.hearts;
-
   document.getElementById('exercise-question').textContent = ex.question;
 
   const optionsContainer = document.getElementById('exercise-options');
+  const fillWrap = document.getElementById('fill-input-wrap');
+  const fillInput = document.getElementById('fill-input');
+  const hintEl = document.getElementById('exercise-hint');
+
   optionsContainer.innerHTML = '';
-  const opts = shuffle(ex.options);
-  opts.forEach(opt => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.textContent = opt;
-    btn.addEventListener('click', () => selectOption(btn, opt, ex));
-    optionsContainer.appendChild(btn);
-  });
+  const isFillBlank = ex.type === 'fill_blank';
+  optionsContainer.style.display = isFillBlank ? 'none' : 'flex';
+  fillWrap.style.display = isFillBlank ? 'block' : 'none';
+
+  if (isFillBlank) {
+    fillInput.value = '';
+    fillInput.disabled = false;
+    fillInput.className = 'fill-input';
+    if (ex.hint) {
+      hintEl.textContent = '💡 ' + ex.hint;
+      hintEl.style.display = 'block';
+    } else {
+      hintEl.style.display = 'none';
+    }
+    fillInput.oninput = () => {
+      document.getElementById('action-btn').classList.toggle('active', fillInput.value.trim().length > 0);
+    };
+    setTimeout(() => fillInput.focus(), 100);
+  } else {
+    hintEl.style.display = 'none';
+    const opts = shuffle(ex.options);
+    opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => selectOption(btn, opt));
+      optionsContainer.appendChild(btn);
+    });
+  }
 
   const feedback = document.getElementById('feedback-banner');
   feedback.className = 'feedback-banner hidden';
@@ -1517,7 +1942,7 @@ function renderExercise() {
   actionBtn.onclick = checkAnswer;
 }
 
-function selectOption(btn, value, ex) {
+function selectOption(btn, value) {
   if (answered) return;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
@@ -1530,50 +1955,65 @@ function checkAnswer() {
     nextExercise();
     return;
   }
-  if (selectedOption === null) return;
-
   const ex = currentQuestions[currentExerciseIndex];
-  answered = true;
-  currentAnswerCorrect = selectedOption === ex.answer;
+  const fillInput = document.getElementById('fill-input');
 
-  document.querySelectorAll('.option-btn').forEach(b => {
-    b.disabled = true;
-    if (b.textContent === ex.answer) {
-      b.classList.add('correct');
-    } else if (b.classList.contains('selected') && !currentAnswerCorrect) {
-      b.classList.add('incorrect');
+  let userRawValue = '';
+
+  if (ex.type === 'fill_blank') {
+    // Se lee el valor EN ESTE INSTANTE, justo antes de comparar, para
+    // evitar cualquier posible desincronizacion con el evento que dispara
+    // checkAnswer (click o Enter).
+    userRawValue = fillInput.value;
+    const userValue = userRawValue.trim();
+    if (userValue.length === 0) return;
+    answered = true;
+    const normalizedUser = normalizeAnswer(userValue);
+    const normalizedAnswer = normalizeAnswer(ex.answer);
+    currentAnswerCorrect = normalizedUser === normalizedAnswer;
+    fillInput.disabled = true;
+    fillInput.className = 'fill-input ' + (currentAnswerCorrect ? 'correct' : 'incorrect');
+    if (!currentAnswerCorrect) {
+      fillInput.value = ex.answer;
     }
-  });
+  } else {
+    if (selectedOption === null) return;
+    answered = true;
+    currentAnswerCorrect = selectedOption === ex.answer;
+    document.querySelectorAll('.option-btn').forEach(b => {
+      b.disabled = true;
+      if (b.textContent === ex.answer) {
+        b.classList.add('correct');
+      } else if (b.classList.contains('selected') && !currentAnswerCorrect) {
+        b.classList.add('incorrect');
+      }
+    });
+  }
 
   const feedback = document.getElementById('feedback-banner');
   const actionBtn = document.getElementById('action-btn');
 
   if (currentAnswerCorrect) {
     sessionCorrect += 1;
-    state.points += 10;
     feedback.className = 'feedback-banner correct';
     feedback.innerHTML = '✅ &nbsp;<strong>¡Correcto!</strong>';
     actionBtn.className = 'big-btn active';
   } else {
-    state.hearts = Math.max(0, state.hearts - 1);
     feedback.className = 'feedback-banner incorrect';
-    feedback.innerHTML = `❌ &nbsp;<strong>Respuesta correcta:</strong> ${ex.answer}`;
+    if (ex.type === 'fill_blank') {
+      feedback.innerHTML = `❌ &nbsp;<strong>Correcta:</strong> "${ex.answer}" &nbsp;<span style="opacity:0.7">(escribiste: "${userRawValue.trim()}")</span>`;
+    } else {
+      feedback.innerHTML = `❌ &nbsp;<strong>Respuesta correcta:</strong> ${ex.answer}`;
+    }
     actionBtn.className = 'big-btn wrong-state active';
     document.getElementById('app').classList.add('shake');
     setTimeout(() => document.getElementById('app').classList.remove('shake'), 400);
   }
   saveState();
   actionBtn.textContent = 'Continuar';
-  document.getElementById('lesson-hearts').textContent = state.hearts;
 }
 
 function nextExercise() {
-  if (state.hearts <= 0 && !currentAnswerCorrect) {
-    showScreen('no-hearts-screen');
-    document.getElementById('footer-bar').classList.add('hidden');
-    return;
-  }
-
   currentExerciseIndex += 1;
   if (currentExerciseIndex >= currentQuestions.length) {
     finishLesson();
@@ -1582,22 +2022,25 @@ function nextExercise() {
   }
 }
 
+function goToHomeFromResult() {
+  renderHome();
+  showScreen('home-screen');
+}
+
 function finishLesson() {
   document.getElementById('lesson-progress').style.width = '100%';
   const accuracy = Math.round((sessionCorrect / sessionTotal) * 100);
-  const earnedPoints = sessionCorrect * 10;
 
   const prevStats = state.topicStats[currentTopic.key] || { timesPlayed: 0, bestAccuracy: 0 };
   state.topicStats[currentTopic.key] = {
     timesPlayed: prevStats.timesPlayed + 1,
     bestAccuracy: Math.max(prevStats.bestAccuracy, accuracy)
   };
-  updateStreak();
   saveState();
 
   document.getElementById('result-emoji').textContent = accuracy >= 80 ? '🎉' : (accuracy >= 60 ? '👍' : '😅');
   document.getElementById('result-title').textContent = accuracy >= 60 ? '¡Lección completada!' : 'Sigue practicando';
-  document.getElementById('result-points').textContent = '+' + earnedPoints;
+  document.getElementById('result-points').textContent = sessionCorrect + '/' + sessionTotal;
   document.getElementById('result-accuracy').textContent = accuracy + '%';
 
   document.getElementById('footer-bar').classList.add('hidden');
@@ -1614,20 +2057,28 @@ document.addEventListener('DOMContentLoaded', () => {
     showScreen('home-screen');
   });
 
-  document.getElementById('continue-btn').addEventListener('click', () => {
-    renderHome();
-    showScreen('home-screen');
-  });
-
-  document.getElementById('refill-hearts-btn').addEventListener('click', () => {
-    state.hearts = MAX_HEARTS;
-    saveState();
-    renderHome();
-    showScreen('home-screen');
-  });
+  document.getElementById('continue-btn').addEventListener('click', goToHomeFromResult);
 
   document.getElementById('reset-progress-btn').addEventListener('click', () => {
-    const ok = confirm('¿Seguro que quieres reiniciar todo el progreso, puntos, racha y vidas?');
+    const ok = confirm('¿Seguro que quieres reiniciar todo el progreso (mejores marcas por tema)?');
     if (ok) resetProgress();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+
+    const continueBtn = document.getElementById('continue-btn');
+    const actionBtn = document.getElementById('action-btn');
+
+    if (isVisible(continueBtn)) {
+      e.preventDefault();
+      continueBtn.click();
+      return;
+    }
+
+    if (isVisible(actionBtn) && actionBtn.classList.contains('active')) {
+      e.preventDefault();
+      actionBtn.click();
+    }
   });
 });
