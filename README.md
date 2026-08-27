@@ -1,4 +1,4 @@
-# Euskaraz — App web para aprender euskera batúa
+# Euskaraz — App web para aprender euskera batua
 
 ## Ampliación: 40 ejercicios nuevos de construir la frase
 
