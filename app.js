@@ -7,7 +7,7 @@
 
 const STORAGE_KEY = 'euskaraz_progress_v6';
 const OLD_STORAGE_KEYS = ['euskaraz_progress_v1', 'euskaraz_progress_v2', 'euskaraz_progress_v3', 'euskaraz_progress_v4', 'euskaraz_progress_v5'];
-const QUESTIONS_PER_SESSION = 10;
+const QUESTIONS_PER_SESSION = 15;
 
 const TOPICS = [
   {
@@ -1407,14 +1407,14 @@ const TOPICS = [
         "prompt": "El tren llega a las nueve de la mañana",
         "correct_words": [
           "Trena",
+          "goizeko",
           "bederatzietan",
           "iristen",
-          "da",
-          "goizean"
+          "da"
         ],
         "distractor_words": [
           "hamarretan",
-          "gauean",
+          "gaueko",
           "atzo"
         ]
       },
