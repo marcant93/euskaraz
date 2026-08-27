@@ -42,8 +42,6 @@ h1.app-title{font-size:26px;font-weight:800;color:#DA291C;}
 .fill-input:focus{outline:none;border-color:var(--blue);}
 .fill-input.correct{border-color:var(--green);background:#d7ffb8;color:var(--green-dark);}
 .fill-input.incorrect{border-color:var(--red);background:#ffdfe0;color:var(--red);}
-
-/* Ejercicio de emparejar */
 #match-wrap{display:flex;gap:12px;justify-content:space-between;}
 .match-col{flex:1;display:flex;flex-direction:column;gap:10px;}
 .match-item{padding:14px 10px;border:2px solid var(--gray);border-radius:12px;background:#fff;font-size:15px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;word-break:break-word;}
@@ -52,7 +50,17 @@ h1.app-title{font-size:26px;font-weight:800;color:#DA291C;}
 .match-item.matched{border-color:var(--green);background:#d7ffb8;color:var(--green-dark);cursor:default;opacity:0.85;}
 .match-item.wrong-flash{border-color:var(--red);background:#ffdfe0;color:var(--red);}
 .match-progress{text-align:center;font-size:13px;color:var(--dark-gray);margin-top:16px;}
-
+#build-sentence-wrap{text-align:left;}
+.build-answer-area{min-height:56px;border:2px dashed var(--gray);border-radius:14px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;margin-bottom:20px;}
+.build-word-chip{padding:10px 14px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:all .15s;border:2px solid transparent;}
+.build-answer-area .build-word-chip{background:#ddf4ff;border-color:var(--blue);color:var(--text);}
+.build-bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.build-bank .build-word-chip{background:#fff;border-color:var(--gray);}
+.build-bank .build-word-chip:active{transform:scale(0.95);}
+.build-word-chip.used{visibility:hidden;}
+.build-answer-area.correct{border-color:var(--green);border-style:solid;background:#f2fff0;}
+.build-answer-area.incorrect{border-color:var(--red);border-style:solid;background:#fff2f2;}
+.build-correct-answer{margin-top:14px;font-size:14px;color:var(--dark-gray);text-align:center;}
 .footer-bar{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:#fff;border-top:2px solid var(--gray);padding:16px;display:flex;justify-content:center;}
 .footer-bar.hidden{display:none !important;}
 .big-btn{width:100%;padding:16px;border:none;border-radius:14px;font-size:16px;font-weight:800;letter-spacing:0.5px;cursor:pointer;text-transform:uppercase;color:#fff;background:var(--gray);color:var(--dark-gray);}
@@ -116,6 +124,11 @@ h1.app-title{font-size:26px;font-weight:800;color:#DA291C;}
         <div class="match-col" id="match-col-right"></div>
       </div>
       <p class="match-progress" id="match-progress" style="display:none;"></p>
+      <div id="build-sentence-wrap" style="display:none;">
+        <div class="build-answer-area" id="build-answer-area"></div>
+        <div class="build-bank" id="build-bank"></div>
+        <p class="build-correct-answer" id="build-correct-answer" style="display:none;"></p>
+      </div>
     </div>
   </div>
 
