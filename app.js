@@ -1074,10 +1074,10 @@ const TOPICS = [
       },
       {
         "type": "mcq",
-        "question": "¿Qué significa 'Docena' en euskera?",
+        "question": "¿Cómo se dice 'Docena' en euskera?",
         "options": [
           "Dozena",
-          "Hamabiko",
+          "Herena",
           "Talde bat",
           "Sail bat"
         ],
