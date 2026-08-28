@@ -1,9 +1,9 @@
 // ===== Euskaraz - App de aprendizaje de euskera =====
 //
-// Ampliacion: se ha pasado de 26 a 66 ejercicios de "build_sentence"
-// (construir la frase), anadiendo 40 nuevos (10 por cada uno de los 4
-// temas). Se mezcla vocabulario ya conocido con contenido nuevo (comida,
-// partes de la casa, profesiones, clima, expresiones de tiempo/frecuencia).
+// NUEVA CATEGORIA: "Gramatika aurreratua" (Gramatica avanzada), con
+// ejercicios sobre los sistemas verbales NOR, NOR-NORI, NOR-NORK,
+// NOR-NORI-NORK, el condicional (baldintza) y el subjuntivo (subjuntiboa),
+// verificados con fuentes especializadas de gramatica vasca.
 
 const STORAGE_KEY = 'euskaraz_progress_v6';
 const OLD_STORAGE_KEYS = ['euskaraz_progress_v1', 'euskaraz_progress_v2', 'euskaraz_progress_v3', 'euskaraz_progress_v4', 'euskaraz_progress_v5'];
@@ -1077,7 +1077,7 @@ const TOPICS = [
         "question": "¿Cómo se dice 'Docena' en euskera?",
         "options": [
           "Dozena",
-          "Herena",
+          "Laurden",
           "Talde bat",
           "Sail bat"
         ],
@@ -1407,14 +1407,14 @@ const TOPICS = [
         "prompt": "El tren llega a las nueve de la mañana",
         "correct_words": [
           "Trena",
-          "goizeko",
           "bederatzietan",
           "iristen",
-          "da"
+          "da",
+          "goizean"
         ],
         "distractor_words": [
           "hamarretan",
-          "gaueko",
+          "gauean",
           "atzo"
         ]
       },
@@ -3252,6 +3252,680 @@ const TOPICS = [
           "separados",
           "peor",
           "rápido"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "gramatika",
+    "name": "Gramatika aurreratua",
+    "subtitle": "NOR-NORI-NORK, baldintza, subjuntiboa",
+    "icon": "🎓",
+    "questions": [
+      {
+        "type": "mcq",
+        "question": "¿Qué sistema verbal se usa en 'Nik liburua irakurri dut' (transitivo, con objeto directo)?",
+        "options": [
+          "NOR",
+          "NOR-NORI",
+          "NOR-NORK",
+          "NOR-NORI-NORK"
+        ],
+        "answer": "NOR-NORK"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué significa 'Niri gustatzen zait'?",
+        "options": [
+          "Me gusta",
+          "Te gusta",
+          "Le doy",
+          "Lo tengo"
+        ],
+        "answer": "Me gusta"
+      },
+      {
+        "type": "translate_eu_es",
+        "question": "Traduce: 'Niri liburuak gustatzen zaizkit'",
+        "options": [
+          "Me gustan los libros",
+          "Te gustan los libros",
+          "Tengo libros",
+          "Doy libros"
+        ],
+        "answer": "Me gustan los libros"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué sistema usa el verbo 'gustatu' (gustar)?",
+        "options": [
+          "NOR",
+          "NOR-NORI",
+          "NOR-NORK",
+          "NOR-NORI-NORK"
+        ],
+        "answer": "NOR-NORI"
+      },
+      {
+        "type": "translate_es_eu",
+        "question": "Traduce al euskera: 'Yo he leído el libro' (NOR-NORK)",
+        "options": [
+          "Nik liburua irakurri dut",
+          "Niri liburua irakurri zait",
+          "Liburua irakurri naiz",
+          "Nik liburua naiz"
+        ],
+        "answer": "Nik liburua irakurri dut"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué significa 'Nik zuri liburua eman dizut'?",
+        "options": [
+          "Yo te he dado el libro a ti",
+          "Tú me has dado el libro",
+          "Él te ha dado el libro",
+          "Yo le he dado el libro a él"
+        ],
+        "answer": "Yo te he dado el libro a ti"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué elementos combina el sistema NOR-NORI-NORK?",
+        "options": [
+          "Sujeto y objeto directo",
+          "Sujeto y objeto indirecto",
+          "Objeto directo, objeto indirecto y sujeto",
+          "Solo el sujeto"
+        ],
+        "answer": "Objeto directo, objeto indirecto y sujeto"
+      },
+      {
+        "type": "translate_eu_es",
+        "question": "Traduce: 'Zuri liburu bat oparitu dizut'",
+        "options": [
+          "Te he regalado un libro",
+          "Me has regalado un libro",
+          "Le he regalado un libro",
+          "Nos has regalado un libro"
+        ],
+        "answer": "Te he regalado un libro"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Cómo se dice 'Yo soy' en NOR (verbo izan)?",
+        "options": [
+          "Naiz",
+          "Da",
+          "Zara",
+          "Gara"
+        ],
+        "answer": "Naiz"
+      },
+      {
+        "type": "translate_es_eu",
+        "question": "Traduce al euskera: 'A mí me duele la cabeza' (NOR-NORI, buruko mina)",
+        "options": [
+          "Niri buruko mina egiten dit",
+          "Niri buruko mina dut",
+          "Nik buruko mina dut",
+          "Niri buruko mina zait"
+        ],
+        "answer": "Niri buruko mina zait"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué significa 'Zuek etorriko bazinete, pozik egongo nintzateke'?",
+        "options": [
+          "Si vinierais, estaría contento",
+          "Si venís, estoy contento",
+          "Cuando vengáis, estaré contento",
+          "Aunque vengáis, no estaré contento"
+        ],
+        "answer": "Si vinierais, estaría contento"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Cuál es la forma condicional de 'izan' para 'yo' (banintz = si yo fuera)?",
+        "options": [
+          "Banintz",
+          "Nintzateke",
+          "Naiz",
+          "Nintzen"
+        ],
+        "answer": "Banintz"
+      },
+      {
+        "type": "translate_eu_es",
+        "question": "Traduce: 'Diruarik banu, etxe berri bat erosiko nuke'",
+        "options": [
+          "Si tuviera dinero, compraría una casa nueva",
+          "Como tengo dinero, compro una casa",
+          "No tengo dinero para comprar casa",
+          "Tenía dinero para la casa"
+        ],
+        "answer": "Si tuviera dinero, compraría una casa nueva"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué forma verbal expresa 'yo sería/estaría' (condicional de izan)?",
+        "options": [
+          "Naiz",
+          "Nintzen",
+          "Nintzateke",
+          "Banintz"
+        ],
+        "answer": "Nintzateke"
+      },
+      {
+        "type": "translate_es_eu",
+        "question": "Traduce al euskera: 'Si él viniera, yo iría con él' (baldintza)",
+        "options": [
+          "Berak etorriko balitz, harekin joango nintzateke",
+          "Berak etorri da, harekin joan naiz",
+          "Berak etortzen bada, harekin joango naiz",
+          "Berak etorriko da, harekin joan naiz"
+        ],
+        "answer": "Berak etorriko balitz, harekin joango nintzateke"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué significa 'Nahi dut zuk hori egin dezazun'? (subjuntivo)",
+        "options": [
+          "Quiero que tú hagas eso",
+          "Quiero hacer eso yo mismo",
+          "Tú quieres que yo haga eso",
+          "Espero que hagas eso pronto"
+        ],
+        "answer": "Quiero que tú hagas eso"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué terminación marca el modo subjuntivo en euskera (ej: 'dezazun')?",
+        "options": [
+          "-(e)la",
+          "-(e)n",
+          "-ko",
+          "-tzen"
+        ],
+        "answer": "-(e)n"
+      },
+      {
+        "type": "translate_eu_es",
+        "question": "Traduce: 'Eskatu dizut isilik egon zaitezen'",
+        "options": [
+          "Te he pedido que te quedes en silencio",
+          "Te he pedido silencio total",
+          "Me has pedido que me calle",
+          "Le he pedido que hable"
+        ],
+        "answer": "Te he pedido que te quedes en silencio"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Cómo se dice 'Nosotros tenemos' (NOR-NORK, ukan)?",
+        "options": [
+          "Genuke",
+          "Dugu",
+          "Gaude",
+          "Gara"
+        ],
+        "answer": "Dugu"
+      },
+      {
+        "type": "translate_es_eu",
+        "question": "Traduce al euskera: 'Ellos me lo dieron a mí' (NOR-NORI-NORK)",
+        "options": [
+          "Haiek eman zidaten",
+          "Nik eman nien",
+          "Haiek eman nuen",
+          "Nik eman nizun"
+        ],
+        "answer": "Haiek eman zidaten"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué significa 'Zergatik ez didazu deitu?'",
+        "options": [
+          "¿Por qué no me has llamado?",
+          "¿Por qué no te he llamado?",
+          "¿Cuándo me llamarás?",
+          "¿Quién me ha llamado?"
+        ],
+        "answer": "¿Por qué no me has llamado?"
+      },
+      {
+        "type": "translate_eu_es",
+        "question": "Traduce: 'Nik zuri egia esan nahi nizuke'",
+        "options": [
+          "Yo querría decirte la verdad",
+          "Tú me dices la verdad",
+          "Él te dice la verdad",
+          "Yo te dije la verdad"
+        ],
+        "answer": "Yo querría decirte la verdad"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Cuál es la forma correcta de 'ellos tienen' (NOR-NORK, ukan, 3ª plural)?",
+        "options": [
+          "Dute",
+          "Dira",
+          "Dituzte",
+          "Ditu"
+        ],
+        "answer": "Dute"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué diferencia hay entre 'dut' y 'ditut'?",
+        "options": [
+          "'Dut' es singular (algo), 'ditut' es plural (varias cosas)",
+          "'Dut' es presente, 'ditut' es pasado",
+          "'Dut' es 1ª persona, 'ditut' es 2ª persona",
+          "No hay diferencia"
+        ],
+        "answer": "'Dut' es singular (algo), 'ditut' es plural (varias cosas)"
+      },
+      {
+        "type": "translate_es_eu",
+        "question": "Traduce al euskera: 'Yo tengo los libros' (plural, NOR-NORK)",
+        "options": [
+          "Nik liburuak ditut",
+          "Nik liburua dut",
+          "Niri liburuak zaizkit",
+          "Nik liburuak dut"
+        ],
+        "answer": "Nik liburuak ditut"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Cómo se dice 'Si yo fuera rico' (banintz)?",
+        "options": [
+          "Aberatsa banintz",
+          "Aberatsa naiz",
+          "Aberatsa nintzen",
+          "Aberatsa izango naiz"
+        ],
+        "answer": "Aberatsa banintz"
+      },
+      {
+        "type": "translate_eu_es",
+        "question": "Traduce: 'Lagundu banit, esker onekoa izango nintzateke'",
+        "options": [
+          "Si me hubieras ayudado, estaría agradecido",
+          "Me has ayudado y estoy agradecido",
+          "No me ayudaste, así que no estoy agradecido",
+          "Ayúdame y estaré agradecido"
+        ],
+        "answer": "Si me hubieras ayudado, estaría agradecido"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué tipo de verbo requiere el sistema NOR-NORI (como 'gustatu', 'ahaztu', 'irudi')?",
+        "options": [
+          "Verbos con sujeto y objeto directo",
+          "Verbos con sujeto y objeto indirecto, sin objeto directo",
+          "Verbos con tres argumentos",
+          "Verbos sin sujeto"
+        ],
+        "answer": "Verbos con sujeto y objeto indirecto, sin objeto directo"
+      },
+      {
+        "type": "translate_es_eu",
+        "question": "Traduce al euskera: 'Se me ha olvidado el nombre' (ahaztu, NOR-NORI)",
+        "options": [
+          "Izena ahaztu zait",
+          "Izena ahaztu dut",
+          "Nik izena ahaztu dut",
+          "Izena ahaztu naiz"
+        ],
+        "answer": "Izena ahaztu zait"
+      },
+      {
+        "type": "mcq",
+        "question": "¿Qué significa 'Espero zuk arazoa konpon dezazun'?",
+        "options": [
+          "Espero que resuelvas el problema",
+          "Espero resolver el problema yo",
+          "Has resuelto el problema",
+          "Resolverás el problema seguro"
+        ],
+        "answer": "Espero que resuelvas el problema"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nik liburua irakurri ___.  (Yo he leído el libro.) [NOR-NORK]",
+        "answer": "dut",
+        "hint": "Auxiliar ukan, 1ª persona (nik...dut)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Niri gustatzen ___ musika.  (Me gusta la música.) [NOR-NORI]",
+        "answer": "zait",
+        "hint": "Auxiliar de NOR-NORI, 3ª persona singular a 1ª"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nik zuri liburua eman ___.  (Yo te he dado el libro.) [NOR-NORI-NORK]",
+        "answer": "dizut",
+        "hint": "Combina NORK=nik, NORI=zuri, NOR=liburua"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Diruarik ___, etxe berri bat erosiko nuke.  (Si tuviera dinero, compraría una casa.)",
+        "answer": "banu",
+        "hint": "Condicional de ukan, 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nahi dut zuk hori egin ___.  (Quiero que tú hagas eso.) [subjuntivo]",
+        "answer": "dezazun",
+        "hint": "Subjuntivo de egin, 2ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Guk etxea garbitu ___.  (Nosotros hemos limpiado la casa.) [NOR-NORK]",
+        "answer": "dugu",
+        "hint": "Auxiliar ukan, 1ª persona plural"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Berak etorriko ___, harekin joango nintzateke.  (Si él viniera, yo iría con él.)",
+        "answer": "balitz",
+        "hint": "Condicional de izan, 3ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Izena ahaztu ___.  (Se me ha olvidado el nombre.) [NOR-NORI]",
+        "answer": "zait",
+        "hint": "Verbo 'ahaztu' (olvidar) usa NOR-NORI"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zuek liburuak irakurri ___.  (Vosotros habéis leído los libros.) [NOR-NORK plural]",
+        "answer": "dituzue",
+        "hint": "Auxiliar ukan, 2ª persona plural + objeto plural"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Eskatu dizut isilik egon ___.  (Te he pedido que te quedes en silencio.) [subjuntivo]",
+        "answer": "zaitezen",
+        "hint": "Subjuntivo de egon, 2ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nik zuri egia esan nahi ___.  (Yo querría decirte la verdad.)",
+        "answer": "nizuke",
+        "hint": "Condicional NOR-NORI-NORK: nik-zuri-esan"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Haiek eman ___ niri.  (Ellos me lo dieron a mí.) [NOR-NORI-NORK pasado]",
+        "answer": "zidaten",
+        "hint": "Pasado: haiek(NORK)-niri(NORI)-zuten"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nik liburuak ___ (varios libros, plural).  (Yo tengo los libros.) [NOR-NORK]",
+        "answer": "ditut",
+        "hint": "Ukan plural, 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Aberatsa ___, mundua bisitatuko nuke.  (Si yo fuera rico, viajaría por el mundo.)",
+        "answer": "banintz",
+        "hint": "Condicional de izan, 1ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Espero zuk arazoa konpon ___.  (Espero que resuelvas el problema.) [subjuntivo]",
+        "answer": "dezazun",
+        "hint": "Subjuntivo de konpondu, 2ª persona"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Berak niri liburu bat oparitu ___.  (Él me regaló un libro a mí.) [NOR-NORI-NORK]",
+        "answer": "zidan",
+        "hint": "Pasado: berak(NORK)-niri(NORI)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zuek ez ___ inoiz gezurrik esan.  (Vosotros nunca habéis dicho mentiras.) [NOR-NORK]",
+        "answer": "duzue",
+        "hint": "Ukan, 2ª persona plural"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Guri gustatzen ___ mendira joatea.  (Nos gusta ir a la montaña.) [NOR-NORI]",
+        "answer": "zaigu",
+        "hint": "NOR-NORI, 3ª persona a 1ª plural"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Nahiko ___ hau nola funtzionatzen duen jakin.  (Me gustaría saber cómo funciona esto.)",
+        "answer": "nuke",
+        "hint": "Condicional de ukan, 1ª persona (querría)"
+      },
+      {
+        "type": "fill_blank",
+        "question": "Zergatik ez ___ deitu?  (¿Por qué no me has llamado?) [NOR-NORI-NORK]",
+        "answer": "didazu",
+        "hint": "zuk(NORK)-niri(NORI)-orainaldia"
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Naiz",
+            "Yo soy/estoy (NOR)"
+          ],
+          [
+            "Dut",
+            "Yo tengo/he (NOR-NORK)"
+          ],
+          [
+            "Zait",
+            "Me... a mí (NOR-NORI)"
+          ],
+          [
+            "Dizut",
+            "Yo te lo doy a ti (NOR-NORI-NORK)"
+          ],
+          [
+            "Banintz",
+            "Si yo fuera (baldintza)"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Gustatu",
+            "Gustar (NOR-NORI)"
+          ],
+          [
+            "Eman",
+            "Dar (NOR-NORI-NORK)"
+          ],
+          [
+            "Irakurri",
+            "Leer (NOR-NORK)"
+          ],
+          [
+            "Ahaztu",
+            "Olvidar (NOR-NORI)"
+          ],
+          [
+            "Egon",
+            "Estar (NOR)"
+          ]
+        ]
+      },
+      {
+        "type": "match",
+        "pairs": [
+          [
+            "Dezazun",
+            "Que tú hagas (subjuntibo)"
+          ],
+          [
+            "Nintzateke",
+            "Yo sería/estaría (baldintza)"
+          ],
+          [
+            "Genuke",
+            "Nosotros tendríamos (baldintza)"
+          ],
+          [
+            "Zenidan",
+            "Tú me lo dabas a mí (NOR-NORI-NORK pasado)"
+          ],
+          [
+            "Zizkidan",
+            "Él me los daba a mí, plural (NOR-NORI-NORK)"
+          ]
+        ]
+      },
+      {
+        "type": "build_sentence",
+        "direction": "es_to_eu",
+        "prompt": "Yo he leído el libro",
+        "correct_words": [
+          "Nik",
+          "liburua",
+          "irakurri",
+          "dut"
+        ],
+        "distractor_words": [
+          "zait",
+          "ditut",
+          "zuek"
+        ]
+      },
+      {
+        "type": "build_sentence",
+        "direction": "eu_to_es",
+        "prompt": "Niri gustatzen zait mendira joatea",
+        "correct_words": [
+          "Me",
+          "gusta",
+          "ir",
+          "a",
+          "la",
+          "montaña"
+        ],
+        "distractor_words": [
+          "gustan",
+          "gustaba",
+          "montañas"
+        ]
+      },
+      {
+        "type": "build_sentence",
+        "direction": "es_to_eu",
+        "prompt": "Yo te he dado el libro a ti",
+        "correct_words": [
+          "Nik",
+          "zuri",
+          "liburua",
+          "eman",
+          "dizut"
+        ],
+        "distractor_words": [
+          "niri",
+          "zait",
+          "haiek"
+        ]
+      },
+      {
+        "type": "build_sentence",
+        "direction": "eu_to_es",
+        "prompt": "Diruarik banu, etxe berri bat erosiko nuke",
+        "correct_words": [
+          "Si",
+          "tuviera",
+          "dinero,",
+          "compraría",
+          "una",
+          "casa",
+          "nueva"
+        ],
+        "distractor_words": [
+          "tengo",
+          "compro",
+          "vieja"
+        ]
+      },
+      {
+        "type": "build_sentence",
+        "direction": "es_to_eu",
+        "prompt": "Quiero que tú hagas eso",
+        "correct_words": [
+          "Nahi",
+          "dut",
+          "zuk",
+          "hori",
+          "egin",
+          "dezazun"
+        ],
+        "distractor_words": [
+          "ditut",
+          "naiz",
+          "dizut"
+        ]
+      },
+      {
+        "type": "build_sentence",
+        "direction": "eu_to_es",
+        "prompt": "Berak etorriko balitz, harekin joango nintzateke",
+        "correct_words": [
+          "Si",
+          "él",
+          "viniera,",
+          "iría",
+          "con",
+          "él"
+        ],
+        "distractor_words": [
+          "viene",
+          "voy",
+          "ella"
+        ]
+      },
+      {
+        "type": "build_sentence",
+        "direction": "es_to_eu",
+        "prompt": "Se me ha olvidado el nombre",
+        "correct_words": [
+          "Izena",
+          "ahaztu",
+          "zait"
+        ],
+        "distractor_words": [
+          "dut",
+          "naiz",
+          "zuten"
+        ]
+      },
+      {
+        "type": "build_sentence",
+        "direction": "eu_to_es",
+        "prompt": "Eskatu dizut isilik egon zaitezen",
+        "correct_words": [
+          "Te",
+          "he",
+          "pedido",
+          "que",
+          "te",
+          "quedes",
+          "en",
+          "silencio"
+        ],
+        "distractor_words": [
+          "hables",
+          "pida",
+          "hablo"
         ]
       }
     ]

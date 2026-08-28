@@ -1,28 +1,37 @@
-# Euskaraz — App web para aprender euskera batua
+# Euskaraz — App web para aprender euskera batúa
 
-## Ampliación: 40 ejercicios nuevos de construir la frase
+## Nueva categoría: Gramatika aurreratua (Gramática avanzada)
 
-Se ha pasado de 26 a **66 ejercicios de "construir la frase"** en total, añadiendo 10
-nuevos por cada uno de los 4 temas. Se combina vocabulario ya existente en la app
-(números, colores, verbos básicos, saludos) con contenido nuevo: comida, partes de la
-casa, profesiones, expresiones de clima y de frecuencia/tiempo.
+Se ha añadido una quinta categoría dedicada a la gramática avanzada del euskera,
+cubriendo los cuatro sistemas verbales y las estructuras condicionales/subjuntivas:
 
-Ejemplos de los ejercicios nuevos:
-- "No sé si voy a poder venir mañana" → Ez dakit biharko etorri ahal izango dudan
-- "El baño está al lado del dormitorio" → Bainugela logelaren ondoan dago
-- "El tren llega a las nueve de la mañana" → Trena bederatzietan iristen da goizean
-- "Compramos verduras y fruta en el mercado" → Barazkiak eta fruta erosi genituen merkatuan
+- **NOR**: verbos intransitivos (izan, egon) — "Naiz", "Nago"
+- **NOR-NORK**: verbos transitivos con objeto directo (ukan) — "Nik liburua irakurri dut"
+- **NOR-NORI**: verbos con objeto indirecto, sin objeto directo (gustatu, ahaztu) —
+  "Niri gustatzen zait"
+- **NOR-NORI-NORK**: verbos con sujeto, objeto directo e indirecto (eman) —
+  "Nik zuri liburua eman dizut"
+- **Baldintza** (condicional): "Diruarik banu, etxe berria erosiko nuke"
+- **Subjuntiboa** (subjuntivo): "Nahi dut zuk hori egin dezazun"
 
-## Contenido actual
+Todo el contenido ha sido verificado con fuentes especializadas de gramática vasca
+(Euskaltzaindia, tablas de flexión verbal de Santurtzi Udal Euskaltegia, partekatu.com).
 
-4 temas: Agurrak, Zenbakiak, Hiztegia, Esaldiak.
-- 191 preguntas de opción múltiple y completar palabra
-- 12 grupos de emparejar (60 parejas)
-- **66 ejercicios de construir la frase**
+61 ejercicios nuevos: 30 de opción múltiple, 20 de completar la palabra, 3 grupos de
+emparejar y 8 de construir la frase.
 
-| Tema | Ejercicios de construir frase |
+## Contenido total de la app
+
+5 temas: Agurrak, Zenbakiak, Hiztegia, Esaldiak, y ahora Gramatika aurreratua.
+
+| Tema | Total ejercicios |
 |---|---|
-| Agurrak | 16 |
-| Zenbakiak | 16 |
-| Hiztegia | 18 |
-| Esaldiak | 16 |
+| Agurrak | 63 |
+| Zenbakiak | 64 |
+| Hiztegia | 74 |
+| Esaldiak | 68 |
+| Gramatika aurreratua | 61 |
+
+**330 ejercicios en total**, mezclando opción múltiple, completar palabra, emparejar
+y construir la frase. Cada partida elige 10 ejercicios al azar del banco combinado
+del tema correspondiente.
